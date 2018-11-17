@@ -1,4 +1,3 @@
-
 import UIKit
 
 typealias Constraint = (UIView, UIView) -> NSLayoutConstraint
