@@ -28,7 +28,7 @@ class KeyboardObserver {
 
     static func addConstraint(_ constraint: NSLayoutConstraint,
                               noKeyboardConst: CGFloat,
-                              keyboardConst: CGFloat?) {
+                              keyboardConst: CGFloat? = nil) {
 
         let constraint = ConstraintObserver(
             constraint: constraint,

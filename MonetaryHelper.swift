@@ -15,16 +15,19 @@ extension String {
 
     func doubleFromCurrency(locale: Locale? = nil) -> Double? {
         let currencyFormatter = NumberFormatter()
-        currencyFormatter.numberStyle = .currency
+        currencyFormatter.numberStyle = .decimal
         currencyFormatter.locale = locale ?? Locale.init(identifier: "pt_BR")
 
         let cleanString = self.replacingOccurrences(of: currencyFormatter.currencySymbol, with: "")
+                              .replacingOccurrences(of: ",", with: "")
+                              .replacingOccurrences(of: ".", with: "")
                               .trimmingCharacters(in: .whitespaces)
+
         guard
-            let value = Decimal(string: cleanString, locale: locale ?? Locale.init(identifier: "pt_BR"))
+            let value = currencyFormatter.number(from: cleanString)?.doubleValue
         else {
             return nil
         }
-        return Double(truncating: value as NSNumber)
+        return value / 100
     }
 }
